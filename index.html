@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Ghosttyの使い方を、コマンドの練習・画面分割デモ・ショートカット・設定例で学べる、Mac向けのやさしいガイド。">
+  <meta name="theme-color" content="#f6f7f2">
+  <title>はじめてのGhostty — やさしい使い方ガイド</title>
+  <style>
+    :root{--paper:#f6f7f2;--white:#fff;--ink:#25392e;--muted:#637267;--line:#dce2d7;--green:#286443;--lime:#d7f18c;--soft:#eaf0e5;--dark:#18271f;--mono:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",Meiryo,sans-serif}
+    *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:35px}body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.85;-webkit-font-smoothing:antialiased}button,input{font:inherit}button,a,input{-webkit-tap-highlight-color:transparent}a{color:var(--green);text-underline-offset:4px}button{cursor:pointer;color:inherit}button:disabled{cursor:default}button:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid #40865e;outline-offset:5px}button{touch-action:manipulation}h1,h2,h3,p{margin-top:0}h1,h2,h3{line-height:1.5;letter-spacing:-.035em}h2{font-size:28px;margin-bottom:13px}h3{font-size:17px;margin-bottom:8px}p{margin-bottom:16px}code,kbd,pre{font-family:var(--mono)}code{font-size:.92em}p code,li code,td code,summary code{background:var(--soft);padding:2px 5px;border-radius:4px;overflow-wrap:anywhere}kbd{display:inline-flex;align-items:center;justify-content:center;min-width:27px;min-height:27px;padding:1px 7px;border:1px solid #d5dbd2;border-bottom:2px solid #c9d1c5;background:#fff;border-radius:5px;font-size:12px;line-height:1.7;white-space:nowrap;font-weight:500}svg{display:block}.icon{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.skip{position:fixed;top:-70px;left:20px;z-index:20;padding:12px 20px;background:var(--green);color:white}.skip:focus{top:12px}
+    .sidebar{position:fixed;inset:0 auto 0 0;width:232px;background:#edf1e8;border-right:1px solid var(--line);padding:38px 23px 24px;display:flex;flex-direction:column;z-index:10}.brand{display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--ink)}.brand-mark{width:39px;height:39px;border-radius:12px;background:var(--ink);display:grid;place-items:center;color:var(--lime)}.brand-word{font-family:var(--mono);font-size:23px;letter-spacing:-1.3px;font-weight:750;line-height:1.2}.brand small{display:block;font-size:9px;letter-spacing:1.8px;margin-top:3px;color:var(--muted)}.sidebar-label{font-size:10px;color:#74816e;letter-spacing:2px;font-weight:700;margin:49px 12px 13px}.nav{display:flex;flex-direction:column;gap:6px}.nav a{display:flex;gap:12px;align-items:center;color:#62715f;text-decoration:none;padding:10px 12px;border-radius:7px;font-size:12px;font-weight:550;transition:background .2s,color .2s}.nav a span{font-family:var(--mono);font-size:10px;opacity:.7}.nav a:hover{background:#e2e9da}.nav a[aria-current="location"]{background:#dce8d1;color:#294b30}.sidebar-bottom{margin-top:auto;padding:24px 12px 0}.reading{display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-bottom:9px}.progress{height:3px;background:#d6ded0;border-radius:10px;overflow:hidden}.progress span{display:block;width:0;height:100%;background:var(--green)}.sidebar-note{margin-top:20px;font-size:10px;line-height:1.8;color:var(--muted)}
+    .page{margin-left:232px;max-width:1610px;padding:0 64px}.topbar{height:86px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);font-size:11px;color:var(--muted)}.topbar-left{display:flex;gap:10px;align-items:center}.status-dot{width:6px;height:6px;display:inline-block;background:var(--green);border-radius:50%}.topbar a{display:flex;gap:9px;align-items:center;color:var(--muted);text-decoration:none}.topbar .icon{width:14px;height:14px}.eyebrow{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:2.3px;color:var(--green);margin-bottom:20px}.hero{padding:63px 0 49px;display:grid;grid-template-columns:1.05fr 1fr;align-items:center;gap:24px;min-height:420px}.hero h1{font-size:clamp(31px,3.1vw,49px);font-weight:750;letter-spacing:-.055em;line-height:1.55;margin-bottom:20px}.hero h1 em{font-style:normal;color:var(--green)}.hero-copy{font-size:13px;color:var(--muted);line-height:2.1;max-width:360px}.actions{display:flex;align-items:center;gap:19px;flex-wrap:wrap;margin-top:26px}.button{display:inline-flex;align-items:center;justify-content:center;gap:12px;border:1px solid transparent;border-radius:7px;padding:11px 18px;text-decoration:none;font-size:12px;font-weight:600;background:var(--green);color:#fff;transition:background .2s,transform .2s}.button:hover{background:#1e5135;transform:translateY(-1px)}.button .icon{width:16px;height:16px}.text-link{font-size:11px;font-weight:600;text-decoration:none}.hero-visual{position:relative;padding:25px 0 25px 14px}.hero-visual:before{content:"";position:absolute;inset:-9px 8px 12px 12px;background-image:radial-gradient(#b8c8ad 1px,transparent 1px);background-size:15px 15px;opacity:.55;z-index:-1}.terminal{background:var(--dark);color:#eaf1e7;border:1px solid #34453a;border-radius:10px;overflow:hidden;box-shadow:0 17px 36px #22361f12}.hero-terminal{transform:rotate(-2deg);max-width:420px;margin:auto}.terminal-bar{height:36px;border-bottom:1px solid #ffffff12;display:flex;align-items:center;position:relative;justify-content:center;background:#ffffff03;color:#a3b2a5;font-size:10px;font-family:var(--mono)}.traffic{position:absolute;left:13px;display:flex;gap:5px}.traffic i{width:7px;height:7px;background:#ee8174;border-radius:50%}.traffic i:nth-child(2){background:#dfbd6e}.traffic i:nth-child(3){background:#9cbd82}.hero-screen{padding:24px 26px 28px;font-family:var(--mono);font-size:12px;line-height:2.2;min-height:220px}.prompt{color:#b4dd92}.terminal-muted{color:#a0b19e}.cursor{display:inline-block;width:8px;height:16px;background:var(--lime);vertical-align:middle}.hero-screen .file-list{color:#e1ce94;word-spacing:12px;font-size:11px}.float-label{position:absolute;right:2px;bottom:8px;display:flex;align-items:center;gap:8px;border:1px solid #c8dba8;background:var(--lime);font-size:11px;font-weight:600;border-radius:6px;padding:8px 13px;transform:rotate(3deg)}.float-label .icon{width:15px;height:15px}.hero-caption{text-align:center;font-size:10px;color:var(--muted);margin:27px 0 0}.intro-strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);display:grid;grid-template-columns:repeat(3,1fr);padding:22px 0;margin-bottom:64px}.intro-item{display:flex;gap:12px;align-items:center;padding:0 22px;border-right:1px solid var(--line)}.intro-item:first-child{padding-left:0}.intro-item:last-child{border:0}.intro-item .icon{color:#58805e;width:23px;height:23px}.intro-item strong{display:block;font-size:12px}.intro-item small{font-size:10px;color:var(--muted)}
+    section[id]{scroll-margin-top:35px;margin-bottom:78px}.section-head{display:flex;align-items:flex-start;gap:17px;margin-bottom:25px}.section-number{font-family:var(--mono);font-size:12px;color:var(--green);background:#e5eddb;border-radius:6px;padding:6px 9px;margin-top:4px}.section-head .eyebrow{margin:0 0 6px;font-size:9px;letter-spacing:1.7px}.section-head p:last-child{color:var(--muted);font-size:12px;margin:0}.section-head h2{margin-bottom:8px;font-size:26px}.start-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.step-card{background:#fff;border:1px solid var(--line);border-radius:9px;padding:23px 21px}.step-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}.step-top .icon{width:26px;height:26px;color:var(--green)}.step-count{font-family:var(--mono);font-size:10px;color:#7d8c77}.step-card h3{font-size:15px}.step-card p{color:var(--muted);font-size:11px;margin-bottom:15px;line-height:1.9}.step-card .small-terminal{display:block;margin-top:15px;background:#edf3e6;border-radius:5px;padding:7px 10px;color:var(--green);font-family:var(--mono);font-size:11px}.step-card .small-terminal span{color:#849276;margin-right:8px}.inline-code{display:inline-flex;align-items:center;gap:10px;background:#eaf0e4;border-radius:6px;padding:7px 12px;margin:0}.copy-small{border:0;background:transparent;color:var(--green);font-size:10px;white-space:nowrap}.note{display:flex;gap:11px;margin-top:20px;padding:14px 17px;border-radius:6px;background:#edf1e7;font-size:11px;color:#5b6e58;line-height:1.9}.note .icon{width:17px;height:17px;margin-top:2px}.note p{margin:0}.install-details{margin-top:15px;border-bottom:1px solid var(--line)}summary{cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:17px 0;font-size:12px;font-weight:600}summary::-webkit-details-marker{display:none}summary:after{content:"+";font-family:var(--mono);font-size:19px;color:var(--green);font-weight:400}details[open]>summary:after{content:"−"}.detail-body{padding:0 0 17px;font-size:12px;color:var(--muted)}.detail-body p:last-child{margin-bottom:0}.detail-body ol{padding-left:20px}.detail-body li{padding:4px 0}.detail-body code{overflow-wrap:anywhere}
+    .practice-grid{display:grid;grid-template-columns:.95fr 1.15fr;gap:26px;align-items:start}.command-list{display:flex;flex-direction:column}.command-row{display:grid;grid-template-columns:87px 1fr 29px;align-items:center;gap:10px;padding:13px 0;border-bottom:1px solid var(--line)}.command-row:first-child{padding-top:0}.command-row code{color:var(--green);font-size:12px}.command-row strong{display:block;font-size:12px;font-weight:600}.command-row small{display:block;font-size:10px;color:var(--muted);margin-top:2px}.try-command{display:grid;place-items:center;width:29px;height:29px;background:#e6eddd;border:0;border-radius:5px}.try-command:hover{background:#d7e3c9}.try-command .icon{width:13px;height:13px}.practice-terminal{min-height:305px}.practice-top{display:flex;gap:6px;align-items:center;font-size:10px;font-family:var(--sans)}.practice-top .status-dot{background:#b6da86;width:5px;height:5px}.practice-log{height:203px;overflow:auto;padding:17px 20px 8px;font-family:var(--mono);font-size:11px;line-height:1.9;white-space:pre-wrap;overflow-wrap:anywhere;scrollbar-color:#5a7355 transparent}.log-command{color:#d9f6bd;margin-top:8px}.log-output{color:#c2ceb9}.log-intro{color:#aabda4;font-size:10px}.practice-form{display:flex;gap:9px;align-items:center;padding:10px 17px 17px;font-family:var(--mono);font-size:12px}.practice-form input{min-width:0;flex:1;color:#f0f5ed;background:transparent;border:0;outline:0;font-family:var(--mono);font-size:12px}.practice-form input:focus-visible{outline:1px solid #9ec782;outline-offset:3px}.practice-form input::placeholder{color:#82957e}.practice-form button{border:1px solid #65775f;border-radius:4px;background:#263d28;color:#d9edc8;padding:3px 9px;font-size:10px}.practice-foot{font-size:10px;color:var(--muted);display:flex;justify-content:space-between;gap:10px;margin-top:10px}.reset-button{background:none;border:0;padding:0;color:var(--green);font-size:10px;text-decoration:underline;text-underline-offset:3px}.micro-tip{margin-top:20px;font-size:11px;color:var(--muted);line-height:2}.micro-tip strong{color:var(--ink)}
+    .workspace{display:grid;grid-template-columns:.8fr 1.2fr;gap:35px;align-items:center}.layout-choices{display:flex;flex-direction:column;gap:9px}.layout-option{display:flex;text-align:left;align-items:center;gap:13px;background:transparent;border:1px solid transparent;border-radius:7px;padding:13px}.layout-option[aria-pressed="true"]{border-color:#c9d9bd;background:#eaf1e1}.layout-option .icon{color:#537b46;width:23px;height:23px}.layout-option strong{font-size:12px;display:block}.layout-option small{font-size:10px;color:var(--muted);display:block;margin-top:2px}.layout-option .layout-key{font-family:var(--mono);font-size:10px;margin-left:auto;white-space:nowrap;color:#5b7051}.split-terminal{box-shadow:none}.split-tabs{display:flex;background:#223126;border-bottom:1px solid #43503d;height:32px;font-family:var(--mono);font-size:9px;color:#a5b39d}.split-tab{padding:7px 20px;border-right:1px solid #43503d}.split-tab:first-child{background:#30402c;color:#d9e8c9}.split-panels{display:grid;grid-template-columns:1fr;min-height:208px}.split-panels.right{grid-template-columns:1fr 1fr}.split-panels.down{grid-template-rows:1fr 1fr}.split-pane{padding:19px;font-family:var(--mono);font-size:10px;line-height:2;color:#d6e4cd;min-width:0;overflow-wrap:anywhere}.split-pane-label{display:block;font-family:var(--sans);font-size:9px;letter-spacing:1px;color:#9db28f;margin-bottom:14px}.split-pane.secondary{border-left:1px solid #61734f;background:#1c2c20}.down .split-pane.secondary{border-left:0;border-top:1px solid #61734f}.split-pane[hidden]{display:none}.split-caption{font-size:10px;margin:13px 0 0;color:var(--muted);text-align:center;min-height:36px}.workspace-note{border-left:3px solid #b9ce9c;padding-left:15px;margin-top:23px;color:var(--muted);font-size:11px}.workspace-note p{margin-bottom:0}
+    .shortcut-toolbar{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:17px}.filters{display:flex;gap:5px;flex-wrap:wrap}.filter{background:transparent;border:1px solid var(--line);font-size:10px;border-radius:5px;padding:6px 11px}.filter[aria-pressed="true"]{background:var(--ink);color:white;border-color:var(--ink)}.search-wrap{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:6px;padding:6px 11px;background:white}.search-wrap .icon{height:15px;width:15px;color:var(--muted)}.search-wrap input{border:0;background:none;min-width:0;width:170px;font-size:11px;outline:none}.shortcut-table{width:100%;border-collapse:collapse;text-align:left;background:#fff;border:1px solid var(--line);font-size:12px}.shortcut-table th{font-weight:500;color:#6d7b63;background:#edf1e8;font-size:10px;padding:11px 17px;border-bottom:1px solid var(--line)}.shortcut-table td{padding:12px 17px;border-bottom:1px solid #e9ede4;vertical-align:middle}.shortcut-table td:first-child{width:40%}.shortcut-table td:last-child{font-size:10px;color:var(--muted)}.key-combo{display:inline-flex;align-items:center;gap:4px;flex-wrap:wrap}.key-plus{color:#9aa48f;font-size:9px}.table-foot{display:flex;justify-content:space-between;gap:15px;font-size:10px;color:var(--muted);margin-top:12px}.empty-search{padding:28px;background:#fff;text-align:center;border:1px solid var(--line);font-size:12px}.key-legend{font-size:10px;color:var(--muted);margin:17px 0 0;line-height:2}.key-legend span{margin-right:12px}.all-shortcuts{margin-top:17px;padding:14px 17px;border:1px dashed #c8d1bd;border-radius:6px;font-size:11px;color:var(--muted)}.all-shortcuts p{margin:0 0 5px}.all-shortcuts code{font-size:11px;color:var(--green);overflow-wrap:anywhere}
+    .config-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:30px}.config-controls{border:1px solid var(--line);background:#fff;border-radius:8px;padding:22px}.control-label{display:flex;align-items:center;justify-content:space-between;font-size:11px;font-weight:600;margin-bottom:12px}.control-label output{font-family:var(--mono);font-weight:400;color:var(--green)}.theme-choices{display:flex;gap:8px;margin-bottom:26px}.theme-choice{flex:1;min-width:0;display:flex;align-items:center;justify-content:center;gap:7px;font-size:10px;background:#fff;border:1px solid var(--line);padding:8px;border-radius:5px}.theme-choice[aria-pressed="true"]{outline:2px solid #639347;outline-offset:1px}.swatch{width:13px;height:13px;border:1px solid #00000018;border-radius:50%;display:inline-block}.range{width:100%;accent-color:var(--green);margin:0 0 23px;display:block;cursor:pointer}.config-description{font-size:10px;line-height:1.9;color:var(--muted);margin:0}.config-preview{background:#18271f;color:#eaf1e7;border:1px solid #34453a;border-radius:8px;overflow:hidden}.config-preview .terminal-bar{background:#ffffff06;color:inherit;opacity:.8}.config-sample{padding:20px;font-family:var(--mono);font-size:15px;line-height:1.8;min-height:126px;overflow-wrap:anywhere}.config-sample .sample-comment{opacity:.6;font-size:.72em}.config-sample .sample-cursor{display:inline-block;background:#d7f18c;width:.56em;height:1.1em;vertical-align:middle}.config-code-wrap{margin-top:13px;border:1px solid var(--line);border-radius:7px;background:#eef2e9;overflow:hidden}.code-toolbar{display:flex;justify-content:space-between;align-items:center;padding:9px 14px;border-bottom:1px solid var(--line);font-size:10px;color:var(--muted)}.copy-button{background:#fff;border:1px solid #d0dac7;border-radius:4px;padding:3px 9px;font-size:10px;color:var(--green)}.config-code-wrap pre{margin:0;padding:15px 17px;font-size:11px;line-height:1.9;overflow-x:auto;color:#355932}.config-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:24px;padding-top:21px;border-top:1px solid var(--line)}.config-step{font-size:11px;color:var(--muted)}.config-step strong{display:block;font-size:12px;color:var(--ink);margin-bottom:8px}.config-step strong span{font-family:var(--mono);font-size:10px;color:var(--green);margin-right:7px}.config-step p{margin:8px 0 0;font-size:10px}.config-step kbd{font-size:10px;min-height:24px;min-width:24px}
+    .faq{border-top:1px solid var(--line)}.faq details{border-bottom:1px solid var(--line)}.faq summary{padding:20px 4px;font-size:13px}.faq summary span{display:flex;align-items:center;gap:14px}.faq summary b{font-family:var(--mono);color:#80a365;font-size:12px}.faq .detail-body{padding:0 27px 20px;line-height:2}.finish{display:flex;align-items:center;justify-content:space-between;gap:24px;background:#e4edd8;border:1px solid #d4e1c5;border-radius:9px;padding:28px;margin-bottom:45px}.finish h3{font-size:20px;margin-bottom:7px}.finish p{font-size:11px;color:#60724f;margin:0}.finish .button{white-space:nowrap;background:var(--ink);font-size:11px}.sources{border-top:1px solid var(--line);padding:25px 0 30px;display:flex;justify-content:space-between;gap:20px;align-items:flex-end}.sources p{font-size:10px;color:var(--muted);margin:0}.source-links{display:flex;gap:16px;flex-wrap:wrap;margin-top:9px}.source-links a{font-size:10px;text-decoration:none}.footer-mark{font-family:var(--mono);font-size:11px;color:#7d8f71;white-space:nowrap}.toast{position:fixed;left:calc(50% + 116px);bottom:24px;transform:translate(-50%,25px);background:var(--ink);color:white;padding:11px 20px;border-radius:7px;box-shadow:0 5px 25px #1a2e1933;font-size:12px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:30;max-width:90vw}.toast.show{transform:translate(-50%,0);opacity:1}noscript p{margin:20px;padding:15px;background:#fff2c7;color:#534824}.print-only{display:none}
+    @media(min-width:1560px){.page{padding:0 90px}.hero{gap:60px}.hero-terminal{max-width:490px}.hero-screen{padding:30px;font-size:14px}}
+    @media(max-width:1200px){.page{padding:0 36px}.sidebar{width:210px;padding-left:17px;padding-right:17px}.page{margin-left:210px}.hero h1{font-size:34px}.hero-screen{font-size:10px;padding:22px 19px}.hero-screen .file-list{font-size:9px}.hero-copy{font-size:12px}.intro-item{padding:0 12px;gap:9px}.intro-item small{font-size:9px}.start-grid{gap:10px}.step-card{padding:20px 16px}.workspace{gap:22px}.layout-option{padding:10px;gap:9px}.layout-option .layout-key{font-size:9px}.shortcut-table td{padding:12px}.toast{left:calc(50% + 105px)}}
+    @media(max-width:960px){.sidebar{width:185px;padding:28px 12px 20px}.brand{gap:8px;padding:0 5px}.brand-word{font-size:21px}.brand-mark{width:34px;height:34px}.sidebar-label{margin-left:10px}.nav a{font-size:11px;gap:9px;padding:10px}.page{margin-left:185px;padding:0 28px}.hero{grid-template-columns:1fr;padding:40px 0 25px}.hero h1{font-size:39px}.hero-copy{max-width:460px}.hero-visual{max-width:460px;width:100%;margin:8px auto 0}.hero-screen{font-size:12px}.hero-screen .file-list{font-size:11px}.intro-strip{margin-bottom:45px;padding:18px 0}.intro-item{align-items:flex-start;gap:8px}.intro-item .icon{width:18px;height:18px;margin-top:3px}.intro-item strong{font-size:10px}.intro-item small{font-size:9px;line-height:1.5;display:block;margin-top:3px}.practice-grid,.workspace,.config-grid{grid-template-columns:1fr}.practice-grid{gap:22px}.layout-choices{flex-direction:row;gap:7px}.layout-option{flex:1;flex-direction:column;align-items:flex-start;gap:7px}.layout-option .layout-key{margin-left:0}.layout-option small{font-size:9px}.workspace{gap:17px}.split-panels{min-height:230px}.config-grid{gap:20px}.config-controls{padding:20px}.start-grid{grid-template-columns:1fr}.step-card{display:grid;grid-template-columns:32px 1fr;column-gap:13px;padding:19px}.step-top{grid-row:1/4;display:block;margin:0}.step-count{display:block;margin-top:12px}.step-card h3{margin-bottom:5px}.step-card p{margin-bottom:0}.step-card .small-terminal{margin-top:10px}.step-card .inline-code{margin-top:10px;width:max-content}.section-head h2{font-size:24px}.shortcut-table td:last-child,.shortcut-table th:last-child{display:none}.shortcut-table td:first-child{width:52%}.config-steps{gap:12px}.finish{padding:24px}.finish h3{font-size:18px}.sources{align-items:flex-start;flex-direction:column}.toast{left:calc(50% + 92px)}}
+    @media(max-width:680px){html{scroll-padding-top:135px}.sidebar{position:sticky;top:0;inset:auto;width:100%;padding:12px 18px 0;border-right:0;border-bottom:1px solid var(--line);background:#edf1e8f7;backdrop-filter:blur(12px)}.brand{padding:0;gap:8px;width:max-content}.brand-mark{width:30px;height:30px;border-radius:9px}.brand-mark svg{width:22px;height:22px}.brand-word{font-size:20px}.brand small{display:none}.sidebar-label,.sidebar-bottom{display:none}.nav{margin:12px -18px 0;flex-direction:row;overflow-x:auto;padding:0 13px 7px;gap:2px;scrollbar-width:thin}.nav a{flex-shrink:0;padding:7px 10px;font-size:10px;gap:6px}.nav a span{font-size:9px}.page{margin:0;padding:0 22px}.topbar{height:57px;font-size:10px}.hero{padding:32px 0 21px;gap:16px;min-height:0}.eyebrow{font-size:9px;margin-bottom:15px}.hero h1{font-size:34px;line-height:1.6;margin-bottom:14px}.hero-copy{font-size:12px;line-height:2}.actions{margin-top:21px;gap:17px}.button{font-size:11px;padding:10px 15px}.hero-visual{padding:22px 4px 20px;margin-top:5px;max-width:420px}.hero-screen{padding:21px;min-height:197px;font-size:11px}.hero-screen .file-list{font-size:10px;word-spacing:9px}.float-label{right:-2px;bottom:4px;font-size:10px;padding:7px 10px}.hero-caption{margin-top:19px}.intro-strip{padding:17px 0;margin-bottom:40px;gap:10px}.intro-item{padding:0 9px 0 0;display:block}.intro-item .icon{width:20px;height:20px;margin-bottom:7px}.intro-item strong{font-size:10px}.intro-item small{font-size:9px}.section-head{gap:12px;margin-bottom:20px}.section-head h2{font-size:23px}.section-head p:last-child{font-size:11px}.section-head .eyebrow{font-size:8px}.section-number{font-size:10px;padding:5px 8px}section[id]{scroll-margin-top:128px;margin-bottom:51px}.note{font-size:10px;padding:12px;gap:8px}.command-row{grid-template-columns:78px 1fr 29px}.layout-option{padding:10px 8px;gap:8px}.layout-option strong{font-size:11px}.layout-option small{font-size:9px;line-height:1.6}.layout-option .layout-key{font-size:8px}.split-pane{padding:14px;font-size:10px}.shortcut-toolbar{gap:12px}.filter{font-size:10px;padding:6px 10px}.search-wrap{width:100%}.search-wrap input{width:100%}.shortcut-table th,.shortcut-table td{padding:11px 10px}.shortcut-table td:first-child{font-size:11px;width:47%}.shortcut-table kbd{font-size:10px;min-width:23px;min-height:25px;padding:1px 5px}.key-combo{gap:3px}.key-plus{font-size:8px}.table-foot{font-size:9px}.key-legend{font-size:9px}.key-legend span{margin-right:6px}.config-steps{grid-template-columns:1fr;gap:17px}.config-step strong{display:inline;margin-right:8px}.config-step p{margin-top:5px}.finish{flex-direction:column;align-items:flex-start;padding:22px;gap:17px;margin-bottom:30px}.finish h3{font-size:18px}.finish p{font-size:10px}.faq summary{font-size:12px;line-height:1.7}.faq .detail-body{font-size:11px;padding-left:23px;padding-right:5px}.sources{padding-top:21px;gap:16px}.source-links{gap:12px}.source-links a{font-size:9px}.toast{left:50%;width:max-content;font-size:11px}.topbar-left{gap:7px}.topbar-left .divider-label{display:none}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}}
+    @media print{body{background:white;color:black;font-size:11px}.sidebar,.topbar,.actions,.try-command,.reset-button,.copy-button,.copy-small,.shortcut-toolbar,.toast,.finish .button{display:none!important}.page{margin:0;padding:0}.hero{grid-template-columns:1fr 1fr;min-height:0;padding:15px 0}.hero h1{font-size:30px}.hero-visual:before{display:none}.hero-terminal{transform:none}.intro-strip{margin-bottom:30px}section[id]{margin-bottom:30px;scroll-margin-top:0}.section-head{break-after:avoid}.step-card,.terminal,.config-grid,.command-row,tr{break-inside:avoid}.start-grid{grid-template-columns:repeat(3,1fr)}.practice-grid{grid-template-columns:1fr 1fr}.config-grid{grid-template-columns:1fr 1fr}.config-steps{grid-template-columns:repeat(3,1fr)}.print-only{display:block}.source-links a{font-size:10px}.shortcut-table td:last-child,.shortcut-table th:last-child{display:table-cell}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+  </style>
+</head>
+<body>
+  <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden" xmlns="http://www.w3.org/2000/svg"><defs>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+    <symbol id="i-external" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></symbol>
+    <symbol id="i-terminal" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="m7 9 3 3-3 3m6 0h4"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M12 4v16"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 12h18"/></symbol>
+    <symbol id="i-tabs" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18m-9-5v5"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5Z"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10v.1"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></symbol>
+    <symbol id="i-command" viewBox="0 0 24 24"><path d="M8 8h8v8H8Zm0 0H5.5A2.5 2.5 0 1 1 8 5.5Zm8 0V5.5A2.5 2.5 0 1 1 18.5 8Zm0 8h2.5a2.5 2.5 0 1 1-2.5 2.5Zm-8 0v2.5A2.5 2.5 0 1 1 5.5 16Z"/></symbol>
+  </defs></svg>
+  <a class="skip" href="#main">本文へスキップ</a>
+  <aside class="sidebar" aria-label="ガイドの目次">
+    <a href="#main" class="brand" aria-label="Ghosttyガイドの先頭へ"><span class="brand-mark" aria-hidden="true"><svg width="27" height="27" viewBox="0 0 32 32" fill="none"><path d="M7 25V13a9 9 0 0 1 18 0v12l-4-3-5 3-5-3-4 3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 12v4m8-4v4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></span><span><span class="brand-word">ghostty</span><small>THE FRIENDLY GUIDE</small></span></a>
+    <p class="sidebar-label">はじめての使い方</p>
+    <nav class="nav">
+      <a href="#start" aria-current="location"><span>01</span>まずは、はじめよう</a>
+      <a href="#commands"><span>02</span>基本のコマンド</a>
+      <a href="#workspace"><span>03</span>タブと画面分割</a>
+      <a href="#shortcuts"><span>04</span>ショートカット</a>
+      <a href="#customize"><span>05</span>自分好みに設定</a>
+      <a href="#faq"><span>06</span>困ったときは</a>
+    </nav>
+    <div class="sidebar-bottom"><div class="reading"><span>ガイドの進み具合</span><span id="progress-label">0%</span></div><div class="progress" aria-hidden="true"><span id="progress-bar"></span></div><p class="sidebar-note">macOS / 初心者向け<br>ひとつずつ、ゆっくりで大丈夫。</p></div>
+  </aside>
+  <main class="page" id="main">
+    <header class="topbar"><div class="topbar-left"><span class="status-dot"></span><span>macOS ガイド</span><span class="divider-label">/</span><span class="divider-label">基本から、少しずつ。</span></div><a href="https://ghostty.org/docs" target="_blank" rel="noopener noreferrer">公式ドキュメント<svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a></header>
+    <div class="hero">
+      <div><p class="eyebrow">A LITTLE GUIDE TO GHOSTTY</p><h1>Ghostty、<br>ここから<em>はじめよう。</em></h1><p class="hero-copy">文字でMacを操作する「ターミナル」。<br>黒い画面も、使い方がわかれば大丈夫。<br>よく使う操作から、ひとつずつ覚えましょう。</p><div class="actions"><a class="button" href="#start">最初の一歩へ<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a><a class="text-link" href="#shortcuts">ショートカット早見表 ↗</a></div></div>
+      <div><div class="hero-visual"><div class="terminal hero-terminal" aria-label="Ghosttyの表示イメージ"><div class="terminal-bar"><span class="traffic" aria-hidden="true"><i></i><i></i><i></i></span>you — zsh</div><div class="hero-screen"><div><span class="prompt">~ ❯</span> pwd</div><div class="terminal-muted">/Users/you</div><br><div><span class="prompt">~ ❯</span> ls</div><div class="file-list">Desktop Documents Downloads</div><br><div><span class="prompt">~ ❯</span> <span class="cursor" aria-hidden="true"></span></div></div></div><span class="float-label"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>まずは、これだけでOK。</span></div><p class="hero-caption">入力する → Enterを押す → 結果が出る。</p></div>
+    </div>
+    <div class="intro-strip"><div class="intro-item"><svg class="icon" aria-hidden="true"><use href="#i-book"/></svg><div><strong>むずかしい言葉は少なめ</strong><small>はじめてでも読める解説</small></div></div><div class="intro-item"><svg class="icon" aria-hidden="true"><use href="#i-terminal"/></svg><div><strong>その場で試せる</strong><small>ブラウザの中で操作を練習</small></div></div><div class="intro-item"><svg class="icon" aria-hidden="true"><use href="#i-command"/></svg><div><strong>あとから見返せる</strong><small>操作と設定をひとまとめ</small></div></div></div>
+    <noscript><p>基本の解説はそのまま読めます。練習欄・検索・設定プレビューを使うにはJavaScriptを有効にしてください。</p></noscript>
+    <section id="start" aria-labelledby="start-title"><div class="section-head"><span class="section-number">01</span><div><p class="eyebrow">FIRST STEPS</p><h2 id="start-title">まずは、3つだけ。</h2><p>設定はあとで大丈夫。Ghosttyを開いて、最初のコマンドを実行してみましょう。</p></div></div>
+      <div class="start-grid">
+        <article class="step-card"><div class="step-top"><svg class="icon" aria-hidden="true"><use href="#i-terminal"/></svg><span class="step-count">STEP 01</span></div><h3>Ghosttyを開く</h3><p>アプリケーションからGhosttyを起動。文字とカーソルが表示されたら、準備完了です。</p><span class="small-terminal"><span>~ ❯</span>ここに入力します</span></article>
+        <article class="step-card"><div class="step-top"><svg class="icon" aria-hidden="true"><use href="#i-command"/></svg><span class="step-count">STEP 02</span></div><h3><code>pwd</code> と入力する</h3><p>「今、どのフォルダにいる？」と聞くコマンドです。半角で入力してください。</p><div class="inline-code"><code>pwd</code><button class="copy-small" data-copy="pwd" aria-label="pwdをコピー">コピー</button></div></article>
+        <article class="step-card"><div class="step-top"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span class="step-count">STEP 03</span></div><h3>Enterで実行する</h3><p><code>/Users/あなたの名前</code> のような場所が出れば成功。次の入力待ちに戻ります。</p><span class="small-terminal"><span>↳</span>/Users/you</span></article>
+      </div>
+      <div class="note"><svg class="icon" aria-hidden="true"><use href="#i-info"/></svg><p><strong>「❯」「%」「$」は、入力していいよの目印。</strong>これは「プロンプト」と呼びます。見本と形が違っても大丈夫。コマンドだけ入力して、Enterを押します。</p></div>
+      <details class="install-details"><summary>まだインストールしていない場合</summary><div class="detail-body"><ol><li><a href="https://ghostty.org/download" target="_blank" rel="noopener noreferrer">公式ダウンロードページ</a>からmacOS版のDMGをダウンロードします。</li><li>DMGを開き、Ghosttyを「アプリケーション」へドラッグします。</li><li>アプリケーション内のGhosttyを開きます。</li></ol><p>Homebrewを使っている場合は <code>brew install --cask ghostty</code> でも導入できます。<a href="https://ghostty.org/docs/install/binary#macos" target="_blank" rel="noopener noreferrer">公式のインストール案内 ↗</a></p></div></details>
+    </section>
+    <section id="commands" aria-labelledby="commands-title"><div class="section-head"><span class="section-number">02</span><div><p class="eyebrow">TALK TO YOUR TERMINAL</p><h2 id="commands-title">「見る」と「移動する」から。</h2><p>まず覚えたい5つのコマンド。矢印を押すと、右の練習画面で試せます。</p></div></div>
+      <div class="practice-grid"><div><div class="command-list">
+        <div class="command-row"><code>pwd</code><div><strong>今いる場所を表示</strong><small>迷ったら、まずこれ。</small></div><button class="try-command" data-command="pwd" aria-label="練習画面でpwdを試す"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button></div>
+        <div class="command-row"><code>ls</code><div><strong>ファイルの一覧を見る</strong><small>今いるフォルダの中身を表示。</small></div><button class="try-command" data-command="ls" aria-label="練習画面でlsを試す"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button></div>
+        <div class="command-row"><code>cd Desktop</code><div><strong>Desktopへ移動</strong><small>ホームにいるときの例。cdの後に空白。</small></div><button class="try-command" data-command="cd Desktop" aria-label="練習画面でcd Desktopを試す"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button></div>
+        <div class="command-row"><code>cd ..</code><div><strong>ひとつ上のフォルダへ</strong><small>「..」は、親フォルダのこと。</small></div><button class="try-command" data-command="cd .." aria-label="練習画面でcd ..を試す"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button></div>
+        <div class="command-row"><code>clear</code><div><strong>画面の表示をすっきり</strong><small>ファイルを削除する操作ではありません。</small></div><button class="try-command" data-command="clear" aria-label="練習画面でclearを試す"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button></div>
+      </div><p class="micro-tip"><strong>小さなコツ</strong>　<kbd>↑</kbd> で前のコマンドを呼び出せます。<br>Ghosttyでは <kbd>Tab</kbd> で名前の補完もできます。<br><code>cd ~</code> なら、どこからでもホームに戻れます。</p></div>
+      <div><div class="terminal practice-terminal"><div class="terminal-bar"><span class="traffic" aria-hidden="true"><i></i><i></i><i></i></span><span class="practice-top"><span class="status-dot"></span>ブラウザで練習</span></div><div class="practice-log" id="practice-log" role="log" aria-label="コマンドの練習結果" aria-live="polite"><div class="log-intro">ここは練習用の、小さなターミナル。<br>「pwd」と入力して、Enterを押してみましょう。</div></div><form class="practice-form" id="practice-form" autocomplete="off"><label for="command-input" class="prompt" id="practice-prompt"><span aria-hidden="true">~ ❯</span><span class="sr-only">練習コマンド</span></label><input id="command-input" name="command" placeholder="pwd" spellcheck="false" autocapitalize="off" autocorrect="off" maxlength="180" aria-describedby="practice-disclaimer"><button type="submit">実行 ↵</button></form></div><div class="practice-foot"><span id="practice-disclaimer">練習用の仮想フォルダです。Macのファイルは変わりません。</span><button class="reset-button" id="reset-practice">リセット</button></div></div></div>
+      <div class="note"><svg class="icon" aria-hidden="true"><use href="#i-info"/></svg><p><strong>Ghosttyは「画面」、シェルは「命令を解釈する係」。</strong>このコマンドは、Ghosttyの中で動くzshなどのシェルが扱います。macOS標準の「ターミナル」でも、同じように使えます。</p></div>
+    </section>
+    <section id="workspace" aria-labelledby="workspace-title"><div class="section-head"><span class="section-number">03</span><div><p class="eyebrow">MAKE SOME ROOM</p><h2 id="workspace-title">作業する場所を、増やそう。</h2><p>切り替えて使うなら「タブ」。並べて見たいなら「分割」。</p></div></div>
+      <div class="workspace"><div><div class="layout-choices" role="group" aria-label="画面構成のデモ"><button class="layout-option" data-layout="tabs" aria-pressed="true"><svg class="icon" aria-hidden="true"><use href="#i-tabs"/></svg><span><strong>タブを増やす</strong><small>作業ごとに切り替える</small></span><span class="layout-key">⌘ T</span></button><button class="layout-option" data-layout="right" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-grid"/></svg><span><strong>左右に分割</strong><small>2つの画面を横に並べる</small></span><span class="layout-key">⌘ D</span></button><button class="layout-option" data-layout="down" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-down"/></svg><span><strong>上下に分割</strong><small>2つの画面を縦に並べる</small></span><span class="layout-key">⌘ ⇧ D</span></button></div><div class="workspace-note"><p>分割したら、使いたい画面をクリック。<br><kbd>⌘</kbd> + <kbd>W</kbd> で、今選んでいる分割画面を閉じられます。分割していなければタブを閉じます。</p></div></div><div><div class="terminal split-terminal"><div class="terminal-bar"><span class="traffic" aria-hidden="true"><i></i><i></i><i></i></span>Ghostty / レイアウトのイメージ</div><div class="split-tabs" id="split-tabs" aria-hidden="true"><span class="split-tab">01 — 作業用</span><span class="split-tab" id="second-tab">02 — 確認用</span></div><div class="split-panels" id="split-panels"><div class="split-pane"><span class="split-pane-label">作業用</span><span class="prompt">~/Desktop ❯</span> ls<br>notes.txt&nbsp; projects<br><span class="prompt">~/Desktop ❯</span> <span class="cursor" aria-hidden="true"></span></div><div class="split-pane secondary" id="second-pane" hidden><span class="split-pane-label">確認用</span><span class="prompt">~ ❯</span> pwd<br>/Users/you</div></div></div><p class="split-caption" id="split-caption" aria-live="polite">タブはノートのページのようなもの。同時に見えるのは選択中のタブです。</p></div></div>
+    </section>
+    <section id="shortcuts" aria-labelledby="shortcuts-title"><div class="section-head"><span class="section-number">04</span><div><p class="eyebrow">KEEP THIS HANDY</p><h2 id="shortcuts-title">よく使うキー、早見表。</h2><p>全部覚えなくてOK。必要になったときに、ここへ戻ってきてください。</p></div></div>
+      <div class="shortcut-toolbar"><div class="filters" role="group" aria-label="ショートカットのカテゴリ"><button class="filter" data-filter="all" aria-pressed="true">すべて</button><button class="filter" data-filter="basic" aria-pressed="false">基本操作</button><button class="filter" data-filter="window" aria-pressed="false">タブ・分割</button><button class="filter" data-filter="config" aria-pressed="false">表示・設定</button></div><label class="search-wrap"><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg><span class="sr-only">ショートカットを検索</span><input type="search" id="shortcut-search" placeholder="操作を検索…" autocomplete="off"></label></div>
+      <table class="shortcut-table"><caption class="sr-only">macOS版Ghosttyの標準ショートカット</caption><thead><tr><th scope="col">やりたいこと</th><th scope="col">ショートカット</th><th scope="col">ひとことメモ</th></tr></thead><tbody id="shortcut-body">
+        <tr data-category="basic"><td>コピー</td><td data-keys="⌘|C">⌘ C</td><td>先に文字をドラッグで選択</td></tr>
+        <tr data-category="basic"><td>貼り付け</td><td data-keys="⌘|V">⌘ V</td><td>実行前に内容を確認</td></tr>
+        <tr data-category="basic"><td>実行中の処理を止める</td><td data-keys="Control|C">Control C</td><td>多くのコマンドを中断</td></tr>
+        <tr data-category="basic"><td>コマンドパレットを開く</td><td data-keys="⌘|⇧|P">⌘ ⇧ P</td><td>操作を名前で探せる</td></tr>
+        <tr data-category="basic"><td>画面内の文字を検索</td><td data-keys="⌘|F">⌘ F</td><td>出力の中から探す</td></tr>
+        <tr data-category="window"><td>新しいウインドウ</td><td data-keys="⌘|N">⌘ N</td><td>別のウインドウを開く</td></tr>
+        <tr data-category="window"><td>新しいタブ</td><td data-keys="⌘|T">⌘ T</td><td>同じウインドウに追加</td></tr>
+        <tr data-category="window"><td>次のタブへ</td><td data-keys="Control|Tab">Control Tab</td><td>Shiftも押すと前のタブへ</td></tr>
+        <tr data-category="window"><td>左右に分割</td><td data-keys="⌘|D">⌘ D</td><td>選択中の画面の右に追加</td></tr>
+        <tr data-category="window"><td>上下に分割</td><td data-keys="⌘|⇧|D">⌘ ⇧ D</td><td>選択中の画面の下に追加</td></tr>
+        <tr data-category="window"><td>次の分割画面へ</td><td data-keys="⌘|]">⌘ ]</td><td>⌘ [ で前の分割画面へ</td></tr>
+        <tr data-category="window"><td>分割画面を一時的に拡大</td><td data-keys="⌘|⇧|Enter">⌘ ⇧ Enter</td><td>もう一度押すと元に戻る</td></tr>
+        <tr data-category="window"><td>今の画面を閉じる</td><td data-keys="⌘|W">⌘ W</td><td>選択中の分割画面、またはタブ</td></tr>
+        <tr data-category="config"><td>文字を大きくする</td><td data-keys="⌘|+">⌘ +</td><td>⌘ = も利用可能。配列に注意</td></tr>
+        <tr data-category="config"><td>文字を小さくする</td><td data-keys="⌘|−">⌘ −</td><td>マイナスキーを押す</td></tr>
+        <tr data-category="config"><td>文字サイズを元に戻す</td><td data-keys="⌘|0">⌘ 0</td><td>数字のゼロ</td></tr>
+        <tr data-category="config"><td>設定ファイルを開く</td><td data-keys="⌘|,">⌘ ,</td><td>カンマキーを押す</td></tr>
+        <tr data-category="config"><td>設定を再読み込み</td><td data-keys="⌘|⇧|,">⌘ ⇧ ,</td><td>設定ファイルを保存してから</td></tr>
+      </tbody></table><p class="empty-search" id="empty-search" hidden>見つかりませんでした。別の言葉で検索してみてください。</p>
+      <div class="table-foot"><span id="shortcut-count" role="status">18件を表示</span><span>macOS / Ghostty 1.4.0 の標準設定で確認</span></div><p class="key-legend"><span><strong>⌘</strong> = Command</span><span><strong>⇧</strong> = Shift</span><span><strong>Control</strong> = ⌃</span>　キーは同時に押します。Ghosttyを選択した状態で使ってください。</p>
+      <div class="all-shortcuts"><p>設定やキーボード配列で変わることがあります。標準の割り当てを確認するには、Ghosttyで次を実行。</p><code>ghostty +list-keybinds --default</code> <button class="copy-small" data-copy="ghostty +list-keybinds --default">コピー</button></div>
+    </section>
+    <section id="customize" aria-labelledby="customize-title"><div class="section-head"><span class="section-number">05</span><div><p class="eyebrow">MAKE IT YOURS</p><h2 id="customize-title">見やすさを、自分好みに。</h2><p>配色と文字サイズを試して、気に入った設定をコピー。まずは小さな変更から。</p></div></div>
+      <div class="config-grid"><div class="config-controls"><div class="control-label" id="theme-label">配色を選ぶ</div><div class="theme-choices" role="group" aria-labelledby="theme-label"><button class="theme-choice" data-theme="forest" aria-pressed="true"><span class="swatch" style="background:#18271f"></span>森</button><button class="theme-choice" data-theme="night" aria-pressed="false"><span class="swatch" style="background:#1c2235"></span>夜</button><button class="theme-choice" data-theme="paper" aria-pressed="false"><span class="swatch" style="background:#f8f5ed"></span>紙</button></div><label class="control-label" for="font-size">文字の大きさ<output id="font-value" for="font-size">15 pt</output></label><input class="range" type="range" id="font-size" min="12" max="22" value="15" step="1"><label class="control-label" for="padding-size">画面の余白<output id="padding-value" for="padding-size">16 pt</output></label><input class="range" type="range" id="padding-size" min="4" max="28" value="16" step="2"><p class="config-description">このガイド独自の配色例です。プレビューはイメージで、実際のフォントや表示とは異なります。Ghosttyの設定は自動では変更されません。</p></div><div><div class="config-preview" id="config-preview"><div class="terminal-bar"><span class="traffic" aria-hidden="true"><i></i><i></i><i></i></span>your little workspace</div><div class="config-sample" id="config-sample"><div class="sample-comment"># ちょうどいい、を見つけよう。</div><div>~ ❯ pwd</div><div>/Users/you</div><div>~ ❯ <span class="sample-cursor" id="sample-cursor" aria-hidden="true"></span></div></div></div><div class="config-code-wrap"><div class="code-toolbar"><span>設定ファイルに追加する内容</span><button class="copy-button" id="copy-config">設定をコピー</button></div><pre><code id="config-code">font-size = 15
+window-padding-x = 16
+window-padding-y = 16
+background = 18271f
+foreground = eaf1e7
+cursor-color = d7f18c</code></pre></div></div></div>
+      <div class="config-steps"><div class="config-step"><strong><span>1.</span>設定を開く</strong><kbd>⌘</kbd> + <kbd>,</kbd><p>Ghosttyで押すと、設定ファイルが開きます。</p></div><div class="config-step"><strong><span>2.</span>貼り付けて保存</strong><p>同じ項目があれば、その値を書き換えます。編集したファイルを保存しましょう。</p></div><div class="config-step"><strong><span>3.</span>再読み込みする</strong><kbd>⌘</kbd> + <kbd>⇧</kbd> + <kbd>,</kbd><p>余白の変更は、新しく開いたタブで確認できます。</p></div></div>
+      <details class="install-details"><summary>設定ファイルの場所・反映されないとき</summary><div class="detail-body"><p>macOSでは通常、<code>~/Library/Application Support/com.mitchellh.ghostty/config.ghostty</code> が使われます。旧形式の <code>config</code> も対応しています。迷ったら <kbd>⌘</kbd> + <kbd>,</kbd> で開いたファイルを編集してください。</p><p><code>~/.config/ghostty/config.ghostty</code> などのXDG側のファイルも読み込みます（XDG_CONFIG_HOME未設定の場合）。両方に同じ項目があると、あとに読み込まれるmacOS側の設定が優先されます。</p><p>文字サイズをショートカットで変更した画面では、設定のサイズ変更がすぐに反映されないことがあります。新しいタブで確認してください。ほかの設定にはアプリの再起動が必要なものもあります。<a href="https://ghostty.org/docs/config" target="_blank" rel="noopener noreferrer">設定の公式ガイド ↗</a></p></div></details>
+    </section>
+    <section id="faq" aria-labelledby="faq-title"><div class="section-head"><span class="section-number">06</span><div><p class="eyebrow">WHEN YOU GET STUCK</p><h2 id="faq-title">困ったら、ここを見てみよう。</h2><p>最初につまずきやすいところを集めました。</p></div></div>
+      <div class="faq">
+        <details><summary><span><b>Q.</b>コピーしようとして、処理が止まった</span></summary><div class="detail-body"><p>Macでコピーするキーは <kbd>⌘</kbd> + <kbd>C</kbd>。文字を選択してから押します。<kbd>Control</kbd> + <kbd>C</kbd> は、多くのコマンドで「中断」の意味になります。</p></div></details>
+        <details><summary><span><b>Q.</b><span>「command not found」と表示される</span></span></summary><div class="detail-body"><p>入力した名前のコマンドが見つからない、という意味です。つづり・半角英数字・余分な記号を確認しましょう。ツールによっては、Ghosttyとは別にインストールが必要です。</p><p><code>ghostty</code> 自体が見つからず、アプリを通常の場所に入れている場合は、<code>/Applications/Ghostty.app/Contents/MacOS/ghostty +list-keybinds --default</code> で標準キー一覧を確認できます。</p></div></details>
+        <details><summary><span><b>Q.</b><span>「No such file or directory」で移動できない</span></span></summary><div class="detail-body"><p>その場所に、指定したフォルダが見つかりません。<code>pwd</code> で現在地、<code>ls</code> で中身を確認しましょう。ホームのDesktopへ移動するなら <code>cd ~/Desktop</code>。名前に空白がある場合は <code>cd "My Folder"</code> のように引用符で囲みます。</p></div></details>
+        <details><summary><span><b>Q.</b>パスワードを入力しても、何も表示されない</span></summary><div class="detail-body"><p>ターミナルでのパスワード入力は、文字や「●」が表示されないことがあります。入力は受け付けられているので、入力を終えたらEnterを押します。</p></div></details>
+        <details><summary><span><b>Q.</b>画面が動かない・入力できない</span></summary><div class="detail-body"><p>まず、入力したい分割画面をクリック。コマンドの実行中なら <kbd>Control</kbd> + <kbd>C</kbd> で中断を試せます。<code>less</code> などの閲覧画面なら <kbd>Q</kbd> で戻れます。別の作業を始めたい場合は <kbd>⌘</kbd> + <kbd>T</kbd> で新しいタブを開いてください。</p></div></details>
+        <details><summary><span><b>Q.</b>ショートカットを忘れてしまった</span></summary><div class="detail-body"><p><kbd>⌘</kbd> + <kbd>⇧</kbd> + <kbd>P</kbd> でコマンドパレットを開くと、操作を名前で探せます。画面上部のメニューでも操作とキーを確認できます。このガイドはmacOS向けで、Linuxではキーの割り当てが異なります。</p></div></details>
+      </div>
+    </section>
+    <div class="finish"><div><h3>今日は、ひとつ使えたら十分。</h3><p>まずは <code>pwd</code>、<code>ls</code>、<code>cd</code>。慣れたら、タブや分割も試してみましょう。</p></div><a class="button" href="#commands">もう一度、練習する<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+    <footer class="sources"><div><p>非公式の日本語ガイド · macOS向け · 確認日 2026.10.31<br>公式ドキュメントとGhostty 1.4.0の標準キー一覧をもとに作成。</p><div class="source-links"><a href="https://ghostty.org/docs/about" target="_blank" rel="noopener noreferrer">Ghosttyについて ↗</a><a href="https://ghostty.org/docs/config" target="_blank" rel="noopener noreferrer">設定ガイド ↗</a><a href="https://ghostty.org/docs/config/reference" target="_blank" rel="noopener noreferrer">設定の全項目 ↗</a><a href="https://ghostty.org/docs/config/keybind" target="_blank" rel="noopener noreferrer">キー設定 ↗</a></div></div><span class="footer-mark">happy typing. _</span></footer>
+  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script>
+    'use strict';
+    const $ = (selector) => document.querySelector(selector);
+    const $$ = (selector) => Array.from(document.querySelectorAll(selector));
+    let toastTimer;
+    function toast(message) {
+      $('#toast').textContent = message;
+      $('#toast').classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => $('#toast').classList.remove('show'), 3000);
+    }
+    async function copyText(text, button) {
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(text);
+        } else {
+          const field = document.createElement('textarea');
+          field.value = text;
+          field.setAttribute('readonly', '');
+          field.style.cssText = 'position:fixed;left:-9999px;top:0';
+          document.body.append(field);
+          field.select();
+          const copied = document.execCommand('copy');
+          field.remove();
+          if (!copied) throw new Error('Copy unavailable');
+        }
+        const original = button.textContent;
+        button.textContent = 'コピーしました ✓';
+        button.disabled = true;
+        toast('コピーしました。Ghosttyで貼り付けて使えます。');
+        setTimeout(() => { button.textContent = original; button.disabled = false; }, 1800);
+      } catch {
+        toast('コピーできませんでした。表示された文字を選択してコピーしてください。');
+      }
+      button.focus({preventScroll: true});
+    }
+    $$('[data-copy]').forEach(button => button.addEventListener('click', () => copyText(button.dataset.copy, button)));
+
+    // This terminal only navigates this in-memory folder map. It never executes shell commands.
+    const home = '/Users/you';
+    const folders = {
+      '/': ['Users/'], '/Users': ['you/'],
+      '/Users/you': ['Desktop/', 'Documents/', 'Downloads/'],
+      '/Users/you/Desktop': ['notes.txt', 'projects/'],
+      '/Users/you/Desktop/projects': ['hello.txt'],
+      '/Users/you/Documents': ['memo.txt', 'My Folder/'],
+      '/Users/you/Documents/My Folder': ['ideas.txt'],
+      '/Users/you/Downloads': ['sample.txt']
+    };
+    let currentPath = home;
+    let history = [];
+    let historyIndex = 0;
+    let historyDraft = '';
+    const commandInput = $('#command-input');
+    const log = $('#practice-log');
+    function shortPath() { return currentPath === home ? '~' : currentPath.startsWith(home + '/') ? '~' + currentPath.slice(home.length) : currentPath; }
+    function updatePrompt() { $('#practice-prompt').firstElementChild.textContent = shortPath() + ' ❯'; }
+    function logLine(text, className) {
+      const line = document.createElement('div');
+      line.className = className;
+      line.textContent = text;
+      log.append(line);
+      while (log.childElementCount > 90) log.firstElementChild.remove();
+    }
+    function resolvePath(input) {
+      const expanded = input === '~' ? home : input.startsWith('~/') ? home + input.slice(1) : input;
+      const absolute = expanded.startsWith('/') ? expanded : currentPath + '/' + expanded;
+      const parts = [];
+      absolute.split('/').forEach(part => {
+        if (part === '..') parts.pop();
+        else if (part && part !== '.') parts.push(part);
+      });
+      return '/' + parts.join('/');
+    }
+    function runCommand(raw) {
+      const command = raw.trim();
+      if (!command) return;
+      history.push(command);
+      if (history.length > 40) history.shift();
+      historyIndex = history.length;
+      historyDraft = '';
+      logLine(shortPath() + ' ❯ ' + command, 'log-command');
+      if (command === 'pwd') logLine(currentPath, 'log-output');
+      else if (command === 'ls') logLine(folders[currentPath].join('   '), 'log-output');
+      else if (command === 'clear') log.replaceChildren();
+      else if (command === 'help') logLine('使えるコマンド: pwd / ls / cd フォルダ名 / cd .. / cd ~ / clear\n↑・↓で入力履歴を呼び出せます。\nここに表示されるフォルダは、練習用のサンプルです。', 'log-output');
+      else if (/^cd(?:\s|$)/.test(command)) {
+        let target = command.slice(2).trim() || '~';
+        let valid = true;
+        if (target.startsWith('"') || target.startsWith("'")) {
+          const quote = target[0];
+          if (target.length < 2 || !target.endsWith(quote) || target.slice(1, -1).includes(quote)) valid = false;
+          else target = target.slice(1, -1);
+        } else if (/\s/.test(target)) valid = false;
+        if (!valid) logLine('フォルダ名をひとつ指定してください。空白を含む名前は "My Folder" のように囲みます。', 'log-output');
+        else {
+          const next = resolvePath(target);
+          if (Object.hasOwn(folders, next)) currentPath = next;
+          else logLine('そのフォルダは見つかりません。ls で中身を確認してみましょう。\nホームのDesktopへ行くなら cd ~/Desktop です。', 'log-output');
+        }
+      } else logLine('この練習欄では実行できないコマンドです。help で使えるコマンドを確認できます。', 'log-output');
+      commandInput.value = '';
+      updatePrompt();
+      log.scrollTop = log.scrollHeight;
+    }
+    $('#practice-form').addEventListener('submit', event => { event.preventDefault(); runCommand(commandInput.value); });
+    $$('[data-command]').forEach(button => button.addEventListener('click', () => runCommand(button.dataset.command)));
+    commandInput.addEventListener('keydown', event => {
+      if (event.key !== 'ArrowUp' && event.key !== 'ArrowDown') return;
+      event.preventDefault();
+      if (historyIndex === history.length) historyDraft = commandInput.value;
+      historyIndex = Math.max(0, Math.min(history.length, historyIndex + (event.key === 'ArrowUp' ? -1 : 1)));
+      commandInput.value = historyIndex < history.length ? history[historyIndex] : historyDraft;
+      commandInput.setSelectionRange(commandInput.value.length, commandInput.value.length);
+    });
+    $('#reset-practice').addEventListener('click', () => {
+      currentPath = home;
+      history = [];
+      historyIndex = 0;
+      historyDraft = '';
+      log.replaceChildren();
+      logLine('ホームに戻りました。pwd や ls を試してみましょう。', 'log-intro');
+      commandInput.value = '';
+      updatePrompt();
+      commandInput.focus({preventScroll: true});
+    });
+
+    const layoutCaptions = {
+      tabs: 'タブはノートのページのようなもの。同時に見えるのは選択中のタブです。',
+      right: '⌘ D で、今の画面の右側にもうひとつ。別のコマンドを並べて使えます。',
+      down: '⌘ ⇧ D で、今の画面の下にもうひとつ。横幅を保ったまま使えます。'
+    };
+    $$('[data-layout]').forEach(button => button.addEventListener('click', () => {
+      const layout = button.dataset.layout;
+      $$('[data-layout]').forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+      $('#split-panels').className = 'split-panels' + (layout === 'tabs' ? '' : ' ' + layout);
+      $('#second-tab').hidden = layout !== 'tabs';
+      $('#second-pane').hidden = layout === 'tabs';
+      $('#split-caption').textContent = layoutCaptions[layout];
+    }));
+
+    const keyNames = {'⌘': 'Command', '⇧': 'Shift', '−': 'マイナス', ',': 'カンマ', ']': '右角括弧', '+': 'プラス'};
+    $$('[data-keys]').forEach(cell => {
+      const keys = cell.dataset.keys.split('|');
+      const group = document.createElement('span');
+      group.className = 'key-combo';
+      group.setAttribute('aria-label', keys.map(key => keyNames[key] || key).join(' + '));
+      keys.forEach((key, index) => {
+        if (index > 0) {
+          const plus = document.createElement('span');
+          plus.className = 'key-plus'; plus.textContent = '+'; plus.setAttribute('aria-hidden', 'true'); group.append(plus);
+        }
+        const element = document.createElement('kbd');
+        element.textContent = key; element.setAttribute('aria-hidden', 'true'); group.append(element);
+      });
+      cell.replaceChildren(group);
+    });
+    let activeFilter = 'all';
+    const shortcutRows = $$('#shortcut-body tr');
+    function filterShortcuts() {
+      const query = $('#shortcut-search').value.trim().normalize('NFKC').toLowerCase();
+      let count = 0;
+      shortcutRows.forEach(row => {
+        const keyLabel = row.querySelector('.key-combo').getAttribute('aria-label');
+        const searchable = (row.textContent + ' ' + keyLabel).normalize('NFKC').toLowerCase();
+        const match = (activeFilter === 'all' || row.dataset.category === activeFilter) && searchable.includes(query);
+        row.hidden = !match;
+        if (match) count++;
+      });
+      $('#shortcut-count').textContent = count + '件を表示';
+      $('#empty-search').hidden = count !== 0;
+    }
+    $$('[data-filter]').forEach(button => button.addEventListener('click', () => {
+      activeFilter = button.dataset.filter;
+      $$('[data-filter]').forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+      filterShortcuts();
+    }));
+    $('#shortcut-search').addEventListener('input', filterShortcuts);
+
+    const themes = {
+      forest: { background: '18271f', foreground: 'eaf1e7', cursor: 'd7f18c' },
+      night: { background: '1c2235', foreground: 'e2e8ff', cursor: 'b8b7ff' },
+      paper: { background: 'f8f5ed', foreground: '29382c', cursor: '39734d' }
+    };
+    let selectedTheme = 'forest';
+    function updateConfig() {
+      const size = Number($('#font-size').value);
+      const padding = Number($('#padding-size').value);
+      const theme = themes[selectedTheme];
+      $('#font-value').textContent = size + ' pt';
+      $('#padding-value').textContent = padding + ' pt';
+      $('#config-preview').style.backgroundColor = '#' + theme.background;
+      $('#config-preview').style.color = '#' + theme.foreground;
+      $('#config-sample').style.fontSize = size + 'px';
+      $('#config-sample').style.padding = padding + 'px';
+      $('#sample-cursor').style.backgroundColor = '#' + theme.cursor;
+      $('#config-code').textContent = [
+        'font-size = ' + size,
+        'window-padding-x = ' + padding,
+        'window-padding-y = ' + padding,
+        'background = ' + theme.background,
+        'foreground = ' + theme.foreground,
+        'cursor-color = ' + theme.cursor
+      ].join('\n');
+    }
+    $$('[data-theme]').forEach(button => button.addEventListener('click', () => {
+      selectedTheme = button.dataset.theme;
+      $$('[data-theme]').forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+      updateConfig();
+    }));
+    $('#font-size').addEventListener('input', updateConfig);
+    $('#padding-size').addEventListener('input', updateConfig);
+    $('#copy-config').addEventListener('click', event => copyText($('#config-code').textContent, event.currentTarget));
+    updateConfig();
+
+    const sections = $$('section[id]');
+    const navLinks = $$('.nav a');
+    let scrollQueued = false;
+    function updateNavigation() {
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const percent = maxScroll > 0 ? Math.max(0, Math.min(100, Math.round(window.scrollY / maxScroll * 100))) : 100;
+      $('#progress-label').textContent = percent + '%';
+      $('#progress-bar').style.width = percent + '%';
+      const threshold = window.innerWidth <= 680 ? 170 : 150;
+      let active = sections[0].id;
+      sections.forEach(section => { if (section.getBoundingClientRect().top <= threshold) active = section.id; });
+      navLinks.forEach(link => {
+        if (link.getAttribute('href') === '#' + active) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
+      });
+      scrollQueued = false;
+    }
+    window.addEventListener('scroll', () => {
+      if (!scrollQueued) { scrollQueued = true; requestAnimationFrame(updateNavigation); }
+    }, {passive: true});
+    window.addEventListener('resize', updateNavigation);
+    updateNavigation();
+  </script>
+</body>
+</html>
